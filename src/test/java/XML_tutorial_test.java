@@ -7,6 +7,7 @@ import org.w3c.dom.Node;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -42,6 +43,21 @@ public class XML_tutorial_test {
             Element element = (Element) node;
             Assertions.assertEquals(id[i], element.getAttribute("id"));
 
+        }
+    }
+    @Test
+    void writeDataToPOJOobjects(){
+        NodeList nodeList = document.getElementsByTagName("employee");
+        String[] id = {"India","Russia","USA"};
+        //
+        for(int i = 0; i < nodeList.getLength(); i++){
+            Node node = nodeList.item(i);
+            Element element = (Element) node;
+            Employee employee = new Employee();
+            //
+            employee.location = element.getElementsByTagName("location").item(0).getTextContent();
+            //
+            Assertions.assertEquals(id[i], employee.location);
         }
     }
 }
