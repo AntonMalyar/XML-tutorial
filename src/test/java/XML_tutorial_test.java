@@ -2,6 +2,8 @@ import javax.xml.parsers.*;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,5 +33,15 @@ public class XML_tutorial_test {
         String rootElementName = root.getNodeName();
         Assertions.assertEquals("employees", rootElementName);
     }
-    
+    @Test
+    void getAllChildNodods(){
+        NodeList nodeList = document.getElementsByTagName("employee");
+        String[] id = {"111","222","333"};
+        for(int i = 0; i < nodeList.getLength(); i++){
+            Node node = nodeList.item(i);
+            Element element = (Element) node;
+            Assertions.assertEquals(id[i], element.getAttribute("id"));
+
+        }
+    }
 }
